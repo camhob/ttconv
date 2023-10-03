@@ -553,6 +553,9 @@ class _SccContext:
       else:
         word = scc_word.to_text()
         debug += word
+        if self.buffered_caption is None and self.active_caption is None:
+          LOGGER.warning(f"Uninitialized caption: skip text \"{word}\".")
+          continue
         self.process_text(word, line.time_code)
         self.previous_code_type = str
 
